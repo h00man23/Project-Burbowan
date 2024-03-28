@@ -86,7 +86,7 @@ function setup() {
   buttonBoba = new Button(basePosX + (margin * 3), basePosY + (margin * 46), 64, 64, cornerRadiusSM, colorPrimary, bobaIcon);
 
   // bubbles related
-  minDist = bubbleSize * 0.65; // Adjust this value to control the amount of overlapping
+  minDist = bubbleSize * 0.75; // Adjust this value to control the amount of overlapping
 }
 
 function draw() {
@@ -329,8 +329,8 @@ class Button {
     if (this.isMouseOver()) {
       this.isClicked = true;
       // Add bubbles to the fixed position inside the cup
-      let x = random(cupPosX + margin, cupPosX + cupWidth - margin);
-      let y = random(cupPosY + margin, cupPosY + cupHeight - teaLevel - margin);
+      let x = random(cupPosX + margin * 2, cupPosX + cupWidth - margin * 2);
+      let y = random(cupPosY + margin * 6, cupPosY + cupHeight - margin * 2);
       addBubble(x, y);
     }
   }
