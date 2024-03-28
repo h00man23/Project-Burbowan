@@ -84,6 +84,9 @@ function setup() {
   buttonTea = new Button(basePosX + (margin * 3), basePosY + (margin * 24), 64, 64, cornerRadiusSM, colorRed, teaIcon);
   buttonZobo = new Button(basePosX + (margin * 3), basePosY + (margin * 35), 64, 64, cornerRadiusSM, colorTeal, zoboIcon);
   buttonBoba = new Button(basePosX + (margin * 3), basePosY + (margin * 46), 64, 64, cornerRadiusSM, colorPrimary, bobaIcon);
+
+  // bubbles related
+  minDist = bubbleSize * 0.65; // Adjust this value to control the amount of overlapping
 }
 
 function draw() {
@@ -161,16 +164,16 @@ function drawTeaLevel() {
   rect(cupPosX + margin, cupPosY + cupHeight - margin - teaLevel, cupWidth - margin * 2, teaLevel);
 }
 
-// Add bubbles
+// Add bubbles by Jackie
 function addBubble(x, y) {
   let newBubble = new Bubble(x, y, bubbleSize);
 
   // Check if the bubble is within the cup boundaries
   if (
-    x >= cupPosX + margin &&
-    x <= cupPosX + cupWidth - margin &&
-    y >= cupPosY + margin &&
-    y <= cupPosY + cupHeight - teaLevel - margin
+    x >= cupPosX + margin * 3 &&
+    x <= cupPosX + cupWidth - margin * 3 &&
+    y >= cupPosY + margin * 6 &&
+    y <= cupPosY + cupHeight - margin * 2
   ) {
     // Check for overlapping with existing bubbles
     let overlapping = checkOverlap(newBubble);
@@ -186,7 +189,7 @@ function checkOverlap(newBubble) {
   // Check for overlapping with existing bubbles
   for (let existingBubble of bubbles) {
     let d = dist(newBubble.x, newBubble.y, existingBubble.x, existingBubble.y);
-    if (d < newBubble.r + existingBubble.r) {
+    if (d < newBubble.r + existingBubble.r - minDist) { // Check against minDist for overlap
       return true;
     }
   }
