@@ -24,6 +24,7 @@ let titleImg;
 let teaIcon;
 let bobaIcon;
 let zoboIcon;
+let refreshIcon;
 
 // colors
 let alpha = 255;
@@ -38,9 +39,11 @@ let teaSaturation;
 let buttonTea;
 let buttonZobo;
 let buttonBoba;
+let buttonNewDrink;
 
 // labels
 let labelTea, labelZobo, labelBoba;
+let labelNewDrink;
 
 // bubbles
 let bubbles = [];
@@ -54,6 +57,7 @@ function preload() {
   teaIcon = loadImage('assets/icon_tea.png');
   bobaIcon = loadImage('assets/icon_boba.png');
   zoboIcon = loadImage('assets/icon_zobo.png');
+  refreshIcon = loadImage('assets/icon_refresh.png');
   strawImg = loadImage('assets/straw.png');
 }
 
@@ -88,6 +92,10 @@ function setup() {
   buttonTea = new Button(basePosX + (margin * 3), basePosY + (margin * 24), 64, 64, cornerRadiusSM, colorRed, teaIcon);
   buttonZobo = new Button(basePosX + (margin * 3), basePosY + (margin * 35), 64, 64, cornerRadiusSM, colorTeal, zoboIcon);
   buttonBoba = new Button(basePosX + (margin * 3), basePosY + (margin * 46), 64, 64, cornerRadiusSM, colorPrimary, bobaIcon);
+
+  // New drink button
+  buttonNewDrink = new Button(basePosX + (margin * 104), basePosY + (margin * 1), 64, 64, cornerRadiusSM, colorWhite, refreshIcon);
+  labelNewDrink = new Label(buttonNewDrink.x + buttonNewDrink.width + margin * 2, buttonNewDrink.y + buttonNewDrink.height / 2, "Order new drink", 24, colorBlack);
 
   // Create labels for each button
   labelTea = new Label(buttonTea.x + buttonTea.width + margin * 2, buttonTea.y + buttonTea.height / 2, "Burmese Tea", 24, colorBlack);
@@ -127,6 +135,10 @@ function draw() {
   // render boba button
   buttonBoba.buttonShadow();
   buttonBoba.display();
+
+  // render new drink button
+  buttonNewDrink.buttonShadow();
+  buttonNewDrink.display();
 
   // Render labels
   labelTea.display();
@@ -222,12 +234,14 @@ function mousePressed() {
   buttonTea.handleTeaLevelClick();
   buttonZobo.handleTeaColorClick();
   buttonBoba.handleAddBobaClick();
+  buttonNewDrink.handleNewDrinkClick();
 }
 
 function mouseReleased() {
   buttonTea.handleRelease();
   buttonZobo.handleRelease();
   buttonBoba.handleRelease();
+  buttonNewDrink.handleRelease();
 }
 
 // Button class start
@@ -357,6 +371,13 @@ class Button {
     }
   }
 
+  handleNewDrinkClick() {
+    if (this.isMouseOver()) {
+      this.isClicked = true;
+      resetProcess();
+    }
+  }
+
   handleRelease() {
     this.isClicked = false;
   }
@@ -425,4 +446,12 @@ class Label {
     text(this.text, this.x, this.y);
     pop();
   }
+}
+
+function resetProcess() {
+  teaLevel = 0;
+  targetTeaLevel = 0;
+  teaSaturation = 71;
+  colorPrimary = color(29, teaSaturation, 95, alpha);
+  bubbles = [];
 }
