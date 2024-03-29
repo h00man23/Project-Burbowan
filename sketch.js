@@ -54,6 +54,7 @@ function preload() {
   teaIcon = loadImage('assets/icon_tea.png');
   bobaIcon = loadImage('assets/icon_boba.png');
   zoboIcon = loadImage('assets/icon_zobo.png');
+  strawImg = loadImage('assets/straw.png');
 }
 
 function setup() {
@@ -113,6 +114,13 @@ function draw() {
   let titleImgPosY = basePosY - 5;
   translate(titleImgPosX, titleImgPosY);
   image(titleImg, 0, 0, titleImg.width * 0.5, titleImg.height * 0.5);
+  pop();
+
+  // straw image
+  push();
+  translate(basePosX + margin * 66.5, basePosY + margin * 12);
+  scale(0.6);
+  image(strawImg, 0, 0);
   pop();
 
   // render tea button
