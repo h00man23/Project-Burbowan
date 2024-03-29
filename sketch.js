@@ -39,6 +39,9 @@ let buttonTea;
 let buttonZobo;
 let buttonBoba;
 
+// labels
+let labelTea, labelZobo, labelBoba;
+
 // bubbles
 let bubbles = [];
 let bubbleSize = 8;
@@ -85,6 +88,11 @@ function setup() {
   buttonZobo = new Button(basePosX + (margin * 3), basePosY + (margin * 35), 64, 64, cornerRadiusSM, colorTeal, zoboIcon);
   buttonBoba = new Button(basePosX + (margin * 3), basePosY + (margin * 46), 64, 64, cornerRadiusSM, colorPrimary, bobaIcon);
 
+  // Create labels for each button
+  labelTea = new Label(buttonTea.x + buttonTea.width + margin * 2, buttonTea.y + buttonTea.height / 2, "Burmese Tea", 24, colorBlack);
+  labelZobo = new Label(buttonZobo.x + buttonZobo.width + margin * 2, buttonZobo.y + buttonZobo.height / 2, "Nigerian Zobo", 24, colorBlack);
+  labelBoba = new Label(buttonBoba.x + buttonBoba.width + margin * 2, buttonBoba.y + buttonBoba.height / 2, "Taiwanese Boba", 24, colorBlack);
+
   // bubbles related
   minDist = bubbleSize * 0.75; // Adjust this value to control the amount of overlapping
 }
@@ -118,6 +126,11 @@ function draw() {
   // render boba button
   buttonBoba.buttonShadow();
   buttonBoba.display();
+
+  // Render labels
+  labelTea.display();
+  labelZobo.display();
+  labelBoba.display();
 
   // Update the tea level smoothly
   teaLevel = lerp(teaLevel, targetTeaLevel, 0.1);
@@ -385,3 +398,22 @@ class Bubble {
   }
 }
 // Bubble class end
+
+class Label {
+  constructor(x, y, text, textSize, textColor) {
+    this.x = x;
+    this.y = y;
+    this.text = text;
+    this.textSize = textSize;
+    this.textColor = textColor;
+  }
+
+  display() {
+    push();
+    fill(this.textColor);
+    textSize(this.textSize);
+    textAlign(LEFT, CENTER);
+    text(this.text, this.x, this.y);
+    pop();
+  }
+}
