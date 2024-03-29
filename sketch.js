@@ -116,13 +116,6 @@ function draw() {
   image(titleImg, 0, 0, titleImg.width * 0.5, titleImg.height * 0.5);
   pop();
 
-  // straw image
-  push();
-  translate(basePosX + margin * 66.5, basePosY + margin * 12);
-  scale(0.6);
-  image(strawImg, 0, 0);
-  pop();
-
   // render tea button
   buttonTea.buttonShadow();
   buttonTea.display();
@@ -176,6 +169,14 @@ function draw() {
   for (let b of bubbles) {
     b.display();
   }
+
+  // straw image
+  push();
+  translate(basePosX + margin * 67, basePosY + margin * 12);
+  tint(255, 127);
+  scale(0.55);
+  image(strawImg, 0, 0);
+  pop();
 }
 
 function drawTeaLevel() {
